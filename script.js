@@ -130,18 +130,16 @@ class POWERCRM {
 		});
 	  
 		if (response.success) {
-		  alert('Formulário enviado com sucesso!');
-		  this.cleanForm();
-		  if (this.pwrcrmform.elements['pwrcrm']) { // Verifica se o elemento existe
-			this.pwrcrmform.elements['pwrcrm'].setAttribute('class', 'pwrcrmhidden');
+			this.showSuccessMessage(); // Mostra a mensagem de sucesso
+			this.cleanForm(); // Limpa o formulário
+			this.showStep(1); // Volta para a etapa 1
+		  } else {
+			alert('Ocorreu um erro ao processar a requisição. Por favor, tente novamente mais tarde.');
 		  }
-		} else {
-		  alert('Ocorreu um erro ao processar a requisição. Por favor, tente novamente mais tarde.');
-		}
-	  };
+		};
 	  
 	  
-	showSuccessMessage = function () {
+	showSuccessMessage() {
 		// Cria um elemento para a mensagem de sucesso
 		const successMessage = document.createElement('div');
 		successMessage.textContent = 'Formulário enviado com sucesso';
@@ -149,7 +147,24 @@ class POWERCRM {
 		successMessage.style.marginTop = '10px';
 		// Adiciona o elemento à página, por exemplo, ao final do formulário
 		this.pwrcrmform.appendChild(successMessage);
-	};
+	
+		// Adiciona evento de clique para voltar para a etapa 1 ao clicar em "OK"
+		successMessage.addEventListener('click', () => {
+			successMessage.style.display = 'none'; // Oculta a mensagem de sucesso
+		});
+		}
+	
+		showStep(stepNumber) {
+		const steps = document.querySelectorAll('.form-step');
+		steps.forEach(step => {
+			step.style.display = 'none';
+		});
+	
+		const currentStep = document.getElementById(`step${stepNumber}`);
+		if (currentStep) {
+			currentStep.style.display = 'block';
+		}
+		}
 	
   
 	cleanForm(){
