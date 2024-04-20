@@ -77,84 +77,80 @@ class POWERCRM {
 	};
   
 	saveForm = async function () {
-	  let pwrcrmdata = {};
-  
-	  if (
-		!this.pwrcrmform.elements['pwrCmpnHsh'] ||
-		!this.pwrcrmform.elements['pwrFrmCode']
-	  ) {
-		alert('O formato do formulÃ¡rio nÃ£o estÃ¡ correto!');
-		return false;
-	  }
-  
-	  this.validadeFieldRequired();
-  
-	  //fields hides
-	  if (this.getValue('#pwrCmpnHsh'))
-		pwrcrmdata.companyHash = this.getValue('#pwrCmpnHsh');
-	  if (this.getValue('#pwrFrmCode'))
-		pwrcrmdata.formCode = this.getValue('#pwrFrmCode');
-	  if (this.getValue('#pwrLdSrc'))
-		pwrcrmdata.leadSource = this.getValue('#pwrLdSrc');
-	  if (this.getValue('#pwrPplnClmn'))
-		pwrcrmdata.pipelineColumn = this.getValue('#pwrPplnClmn');
-	  if (this.getValue('#pwrCnsltnt'))
-		pwrcrmdata.companyUserCode = this.getValue('#pwrCnsltnt');
-	  if (this.getValue('#pwrAfflt'))
-		pwrcrmdata.affiliateCode = this.getValue('#pwrAfflt');
-  
-	  //client
-	  if (this.fieldName) pwrcrmdata.clientName = this.fieldName.value;
-  
-	  if (this.fieldPhone) pwrcrmdata.clientPhone = this.fieldPhone.value;
-
-	  if (this.fieldPlate) pwrcrmdata.vehiclePlate = this.fieldPlate.value;
-  
-	  if (this.fieldCity) pwrcrmdata.clientCity = this.fieldCity.value;
-
-	  if(this.fieldState) pwrcrmdata.clientState = this.fieldState.value;
-  
-	  try{
+		let pwrcrmdata = {};
+	  
+		if (
+		  !this.pwrcrmform.elements['pwrCmpnHsh'] ||
+		  !this.pwrcrmform.elements['pwrFrmCode']
+		) {
+		  alert('O formato do formulário não está correto!');
+		  return false;
+		}
+	  
+		this.validadeFieldRequired();
+	  
+		//fields hides
+		if (this.getValue('#pwrCmpnHsh'))
+		  pwrcrmdata.companyHash = this.getValue('#pwrCmpnHsh');
+		if (this.getValue('#pwrFrmCode'))
+		  pwrcrmdata.formCode = this.getValue('#pwrFrmCode');
+		if (this.getValue('#pwrLdSrc'))
+		  pwrcrmdata.leadSource = this.getValue('#pwrLdSrc');
+		if (this.getValue('#pwrPplnClmn'))
+		  pwrcrmdata.pipelineColumn = this.getValue('#pwrPplnClmn');
+		if (this.getValue('#pwrCnsltnt'))
+		  pwrcrmdata.companyUserCode = this.getValue('#pwrCnsltnt');
+		if (this.getValue('#pwrAfflt'))
+		  pwrcrmdata.affiliateCode = this.getValue('#pwrAfflt');
+	  
+		//client
+		if (this.fieldName) pwrcrmdata.clientName = this.fieldName.value;
+	  
+		if (this.fieldPhone) pwrcrmdata.clientPhone = this.fieldPhone.value;
+	  
+		if (this.fieldPlate) pwrcrmdata.vehiclePlate = this.fieldPlate.value;
+	  
+		if (this.fieldCity) pwrcrmdata.clientCity = this.fieldCity.value;
+	  
+		if (this.fieldState) pwrcrmdata.clientState = this.fieldState.value;
+	  
+		try {
 		  // get consultant value by url
-		  if(!pwrcrmdata.companyUserCode)
-			  pwrcrmdata.companyUserCode = this.getParameter('id');
-  
-		  if(!pwrcrmdata.affiliateCode)
-			  pwrcrmdata.affiliateCode = this.getParameter('in');
-  
-	  }catch(e){}
-  
-	  const response = await this.fetchApi(`${this.pwrst}/svQttnDynmcFrm`, {
-		method: 'POST',
-		body: JSON.stringify(pwrcrmdata),
-		headers: { 'Content-Type': 'application/json' },
-	  });
-  
-	  if (response.success) {
-		  if (this.getValue('#pwrWhtsNmbr')){
-			  let whatsappNumber = this.getValue('#pwrWhtsNmbr');
-				  if(whatsappNumber){
-					let urlWhats = 'https://api.whatsapp.com/send?phone='+whatsappNumber;
-					let textWhats = 'OlÃ¡, acabei de fazer uma '+response.keywordsQuotation+' em seu site, poderia me ajudar com mais detalhes.';
-					window.open(urlWhats +"&text="+textWhats, '_blank');
-			  }
-			  this.cleanForm();
-			  this.pwrcrmform.elements['pwrcrm'].setAttribute('class', 'pwrcrmhidden');
-		  }else{
-			if (response.redirecTo != null && response.redirecTo.length > 0) {
-			  window.location = response.redirecTo;
-			} else if (response.isPlan > 0) {
-			  if (response.isPlan == 1)
-				window.location = this.pwrst + '/compareTables?h=' + response.qttnCd;
-			  else
-				window.location =
-				  this.receivedQuotationLink+'?h=' + response.qttnCd;
-			} else window.location = this.noPlanLink+'?h=' + response.qttnCd + this.getParameter("h");
+		  if (!pwrcrmdata.companyUserCode)
+			pwrcrmdata.companyUserCode = this.getParameter('id');
+	  
+		  if (!pwrcrmdata.affiliateCode)
+			pwrcrmdata.affiliateCode = this.getParameter('in');
+		} catch (e) {}
+	  
+		const response = await this.fetchApi(`${this.pwrst}/svQttnDynmcFrm`, {
+		  method: 'POST',
+		  body: JSON.stringify(pwrcrmdata),
+		  headers: { 'Content-Type': 'application/json' },
+		});
+	  
+		if (response.success) {
+		  alert('Formulário enviado com sucesso!');
+		  this.cleanForm();
+		  if (this.pwrcrmform.elements['pwrcrm']) { // Verifica se o elemento existe
+			this.pwrcrmform.elements['pwrcrm'].setAttribute('class', 'pwrcrmhidden');
 		  }
-  
-	  } else alert(response.message);
+		} else {
+		  alert('Ocorreu um erro ao processar a requisição. Por favor, tente novamente mais tarde.');
+		}
+	  };
+	  
+	  
+	showSuccessMessage = function () {
+		// Cria um elemento para a mensagem de sucesso
+		const successMessage = document.createElement('div');
+		successMessage.textContent = 'Formulário enviado com sucesso';
+		successMessage.style.color = 'green';
+		successMessage.style.marginTop = '10px';
+		// Adiciona o elemento à página, por exemplo, ao final do formulário
+		this.pwrcrmform.appendChild(successMessage);
 	};
-  
+	
   
 	cleanForm(){
 		try {
