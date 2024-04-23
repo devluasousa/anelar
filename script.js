@@ -138,25 +138,25 @@ class POWERCRM {
 		};
 	
 		showStep(stepNumber) {
-		const steps = document.querySelectorAll('.form-step');
-		steps.forEach(step => {
-			step.style.display = 'none';
+			const steps = document.querySelectorAll('.form-step');
+			steps.forEach(step => {
+				step.style.display = 'none';
 		});
 	
-		const currentStep = document.getElementById(`step${stepNumber}`);
-		if (currentStep) {
-			currentStep.style.display = 'block';
-		}
-		}
-	
+        const currentStep = document.getElementById(`step${stepNumber}`);
+        if (currentStep) {
+            currentStep.style.display = 'block';
+        }
+    }
   
-	cleanForm(){
-		try {
-			this.cleanForm(); // Limpa o formulário
-			this.showStep(1); // Volta para a etapa 1
-
-	   		}catch (e) {}
-		}
+    cleanForm() {
+        try {
+            this.pwrcrmform.reset(); // Limpa o formulário
+            this.showStep(1); // Volta para a etapa 1
+        } catch (e) {
+            console.error(e);
+        }
+    }
   
 	async fetchStates() {
 		this.fieldState.innerHTML = '<option value="0">Buscando estados..</option>';
