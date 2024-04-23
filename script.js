@@ -136,7 +136,19 @@ class POWERCRM {
 			alert('Ocorreu um erro ao processar a requisição. Por favor, tente novamente mais tarde.');
 		  }
 		};
-	  
+	
+		showStep(stepNumber) {
+		const steps = document.querySelectorAll('.form-step');
+		steps.forEach(step => {
+			step.style.display = 'none';
+		});
+	
+		const currentStep = document.getElementById(`step${stepNumber}`);
+		if (currentStep) {
+			currentStep.style.display = 'block';
+		}
+		}
+	
   
 	cleanForm(){
 		try {
