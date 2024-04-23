@@ -130,52 +130,18 @@ class POWERCRM {
 		});
 	  
 		if (response.success) {
-			this.showSuccessMessage(); // Mostra a mensagem de sucesso
-			this.cleanForm(); // Limpa o formulário
-			this.showStep(1); // Volta para a etapa 1
+		    window.location.href = 'https://anelarmutual.com.br/pagina-de-obrigado/'; 
+
 		  } else {
 			alert('Ocorreu um erro ao processar a requisição. Por favor, tente novamente mais tarde.');
 		  }
 		};
 	  
-	  
-	showSuccessMessage() {
-		// Cria um elemento para a mensagem de sucesso
-		const successMessage = document.createElement('div');
-		successMessage.textContent = 'Formulário enviado com sucesso';
-		successMessage.style.color = 'green';
-		successMessage.style.marginTop = '10px';
-		// Adiciona o elemento à página, por exemplo, ao final do formulário
-		this.pwrcrmform.appendChild(successMessage);
-	
-		// Adiciona evento de clique para voltar para a etapa 1 ao clicar em "OK"
-		successMessage.addEventListener('click', () => {
-			successMessage.style.display = 'none'; // Oculta a mensagem de sucesso
-		});
-		}
-	
-		showStep(stepNumber) {
-		const steps = document.querySelectorAll('.form-step');
-		steps.forEach(step => {
-			step.style.display = 'none';
-		});
-	
-		const currentStep = document.getElementById(`step${stepNumber}`);
-		if (currentStep) {
-			currentStep.style.display = 'block';
-		}
-		}
-	
   
 	cleanForm(){
 		try {
-			if(this.fieldName) this.fieldName.value = '';
-			if(this.fieldPhone) this.fieldPhone.value = '';
-  
-			if(this.fieldPlate) this.fieldPlate.value = '';
-
-			if(this.fieldCity) this.fieldCity.value = '0';
-			if(this.fieldState) this.fieldState.value = '0';
+			this.cleanForm(); // Limpa o formulário
+			this.showStep(1); // Volta para a etapa 1
 
 	   		}catch (e) {}
 		}
