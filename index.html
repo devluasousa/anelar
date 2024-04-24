@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
+<head>
     <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
     <section id="pwrcrm">
         <form id="pwrcrmform">
             <input type="hidden" value="4nel4r mutu4l773" id="pwrCmpnHsh" name="pwrCmpnHsh">
             <input type="hidden" value="VBlZgdGa" id="pwrFrmCode" name="pwrFrmCode">
             <input type="hidden" value="1" id="pwrPplnClmn" name="pwrPplnClmn">
             <input type="hidden" value="8276" id="pwrLdSrc" name="pwrLdSrc">
-
             
             <!-- Etapa 1 -->
             <div id="step1" class="form-step">
-            <div class="pwrcrmInputCont">
-                <label for="pwrClntNm">Nome<strong>*</strong></label>
-                <input type="text" required="required" id="pwrClntNm" name="pwrClntNm">
-            </div>
-            <div class="pwrcrmInputCont">
-                <label for="pwrCltPhn">Telefone<strong>*</strong></label>
-                <input type="tel" required="required" placeholder="(__) _____-____" maxlength="11" class="phone_mask" id="pwrCltPhn" name="pwrCltPhn">
-            </div>
-            <button type="button" onclick="nextStep(2)">Próximo</button>
+                <div class="pwrcrmInputCont">
+                    <label for="pwrClntNm">Nome<strong>*</strong></label>
+                    <input type="text" required id="pwrClntNm" name="pwrClntNm">
+                </div>
+                <div class="pwrcrmInputCont">
+                    <label for="pwrCltPhn">Telefone<strong>*</strong></label>
+                    <input type="tel" required placeholder="(__) _____-____" maxlength="11" class="phone_mask" id="pwrCltPhn" name="pwrCltPhn">
+                </div>
+                <button type="button" onclick="nextStep(1)">Próximo</button>
             </div>
             <!-- Etapa 2 -->
             <div id="step2" class="form-step" style="display: none;">
-            <div class="pwrcrmInputCont">
-                <label for="pwrVhclPlt">Placa<strong>*</strong></label>
-                <input type="text" required="required" placeholder="XXX0000" maxlength="7" id="pwrVhclPlt" name="pwrVhclPlt">
-            </div>
-            <button type="button" class="previous" onclick="prevStep(1)">Anterior</button>
-            <button type="button" onclick="nextStep(3)">Próximo</button>
+                <div class="pwrcrmInputCont">
+                    <label for="pwrVhclPlt">Placa<strong>*</strong></label>
+                    <input type="text" required placeholder="XXX0000" maxlength="7" id="pwrVhclPlt" name="pwrVhclPlt">
+                </div>
+                <button type="button" class="previous" onclick="prevStep(1)">Anterior</button>
+                <button type="button" onclick="nextStep(2)">Próximo</button>
             </div>
             <!-- Etapa 3 -->
             <div id="step3" class="form-step" style="display: none;">
-            <!-- Campos de Estado e Cidade -->
-            <div class="pwrcrmInputCont">
-                <label for="pwrStt">Estado<strong>*</strong>
-                </label>
-                <select required="required" id="pwrStt" name="pwrStt">
-                    <option value="0">Selecione o estado</option>
-                </select>
-            </div>
-            <div class="pwrcrmInputCont">
-                <label for="pwrCt">Cidade<strong>*</strong>
-                </label>
-                <select required="required" id="pwrCt" name="pwrCt">
-                    <option value="0">Selecione a cidade</option>
-                </select>
-            </div>
-            <button type="button" class="previous" onclick="prevStep(2)">Anterior</button>
-            <button type="submit">Salvar</button>
+                <div class="pwrcrmInputCont">
+                    <label for="pwrStt">Estado<strong>*</strong></label>
+                    <select required id="pwrStt" name="pwrStt">
+                        <option value="">Selecione o estado</option>
+                    </select>
+                </div>
+                <div class="pwrcrmInputCont">
+                    <label for="pwrCt">Cidade<strong>*</strong></label>
+                    <select required id="pwrCt" name="pwrCt">
+                        <option value="">Selecione a cidade</option>
+                    </select>
+                </div>
+                <button type="button" class="previous" onclick="prevStep(2)">Anterior</button>
+                <button type="submit">Salvar</button>
             </div>
 
-            <div id="successMessage" style="display: none;">
-            </div>
-
-            <script src="script.js" defer></script>
+            <div id="successMessage" style="display: none;"></div>
         </form>
     </section>
+    <script src="script.js" defer></script>
+</body>
+</html>
