@@ -7,6 +7,7 @@ class POWERCRM {
     //fields
     fieldName;
     fieldPhone;
+    fieldEmail;
     fieldPlate;
     fieldCity;
     fieldState;
@@ -15,6 +16,7 @@ class POWERCRM {
         this.pwrcrmform = form;
         this.fieldName = this.pwrcrmform.elements['pwrClntNm'];
         this.fieldPhone = this.pwrcrmform.elements['pwrCltPhn'];
+        this.fieldEmail = this.pwrcrmform.elements['pwrClntEm'];
         this.fieldPlate = this.pwrcrmform.elements['pwrVhclPlt'];
         this.fieldCity = this.pwrcrmform.elements['pwrCt'];
         this.fieldState = this.pwrcrmform.elements['pwrStt'];
@@ -53,7 +55,7 @@ class POWERCRM {
 
     saveForm = async function () {
         // Verifica se os campos obrigatórios estão preenchidos
-        const requiredFields = [this.fieldName, this.fieldPhone, this.fieldPlate];
+        const requiredFields = [this.fieldName, this.fieldPhone, this.fieldPlate, this.fieldEmail];
         for (let field of requiredFields) {
             if (!field || !field.value.trim()) {
                 alert('Todos os campos são obrigatórios. Por favor, preencha-os antes de submeter.');
@@ -187,6 +189,7 @@ function nextStep(stepNumber) {
         console.error("Erro: Próxima etapa não encontrada.");
     }
 }
+
 
 function prevStep(stepNumber) {
     // Esconde todas as etapas
