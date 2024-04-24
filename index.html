@@ -21,6 +21,10 @@
                     <label for="pwrCltPhn">Telefone<strong>*</strong></label>
                     <input type="tel" required placeholder="(__) _____-____" maxlength="11" class="phone_mask" id="pwrCltPhn" name="pwrCltPhn">
                 </div>
+                <div class="pwrcrmInputCont">
+                    <label for="pwrClntEm">Email<strong>*</strong></label>
+                    <input type="email" required id="pwrClntEm" name="pwrClntEm" placeholder="email@exemplo.com">
+                </div>
                 <button type="button" onclick="nextStep(1)">Próximo</button>
             </div>
             <!-- Etapa 2 -->
@@ -50,7 +54,6 @@
                 <button type="submit">Salvar</button>
             </div>
 
-            <div id="successMessage" style="display: none;"></div>
         </form>
     </section>
     <script src="script.js" defer></script>
